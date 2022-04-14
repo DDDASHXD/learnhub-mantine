@@ -45,7 +45,7 @@ let games = [
         subtext:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
         // tags: ["3d", "racing", "1-grade"],
-        tags: [{ label: "3d" }, { label: "bilspil" }, { label: "1. klasse" }],
+        tags: [{ label: "3d" }, { label: "rollespil" }, { label: "1. klasse" }],
         subject: "dansk",
     },
     {
@@ -54,7 +54,7 @@ let games = [
         subtext:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
         // tags: ["2d", "racing", "1-grade"],
-        tags: [{ label: "2d" }, { label: "bilspil" }, { label: "1. klasse" }],
+        tags: [{ label: "2d" }, { label: "arkade" }, { label: "1. klasse" }],
         subject: "engelsk",
     },
     {
@@ -85,45 +85,68 @@ let games = [
         subtext:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
         //tags: ["2d", "racing", "1-grade", "AAAAAAAA"],
-        tags: [{ label: "2d" }, { label: "bilspil" }, { label: "1. klasse" }],
+        tags: [{ label: "2d" }, { label: "bilspil" }, { label: "7. klasse" }],
         subject: "dansk",
     },
 ];
 
 const GamesView = (props) => {
     const [count, setCount] = useState(0);
-    const [tmpGames, setTmpGames] = useState([]);
+    const [tmpGames, setTmpGames] = useState(games);
 
     useEffect(() => {
-        setTmpGames(games);
         if (props.filterList.length > 0) {
             let tmp = [];
-            for (let i = 0; i < games.length; i++) {
-                for (let j = 0; j < props.filterList.length; j++) {
-                    if (
-                        games[i].subject === props.filterList[j].toLowerCase()
-                    ) {
-                        tmp.push(games[i]);
-                    }
-
-                    for (let l = 0; l < games[i].tags.length; l++) {
+            if (props.filterList.length == 1) {
+                for (let i = 0; i < games.length; i++) {
+                    for (let j = 0; j < props.filterList.length; j++) {
                         if (
-                            games[i].tags[l].label ===
+                            games[i].subject ===
                             props.filterList[j].toLowerCase()
                         ) {
                             tmp.push(games[i]);
                         }
+
+                        for (let l = 0; l < games[i].tags.length; l++) {
+                            if (
+                                games[i].tags[l].label ===
+                                props.filterList[j].toLowerCase()
+                            ) {
+                                tmp.push(games[i]);
+                            }
+                        }
                     }
                 }
-
-                for (let j = 0; j < tmp.length; j++) {
-                    for (let k = j + 1; k < tmp.length; k++) {
-                        if (tmp[j].title === tmp[k].title) {
-                            tmp.splice(k, 1);
+            } else {
+                for (let i = 0; i < tmpGames.length; i++) {
+                    for (let j = 0; j < props.filterList.length; j++) {
+                        if (
+                            tmpGames[i].subject ===
+                            props.filterList[j].toLowerCase()
+                        ) {
+                            tmp.push(tmpGames[i]);
+                        } else {
+                            for (let l = 0; l < tmpGames[i].tags.length; l++) {
+                                if (
+                                    tmpGames[i].tags[l].label ===
+                                    props.filterList[j].toLowerCase()
+                                ) {
+                                    tmp.push(tmpGames[i]);
+                                }
+                            }
                         }
                     }
                 }
             }
+            // Remove duplicates
+            for (let n = 0; n < tmp.length; n++) {
+                for (let m = n + 1; m < tmp.length; m++) {
+                    if (tmp[n].title === tmp[m].title) {
+                        tmp.splice(m, 1);
+                    }
+                }
+            }
+
             setTmpGames(tmp);
         } else {
             setTmpGames(games);
