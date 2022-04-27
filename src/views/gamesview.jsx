@@ -112,39 +112,37 @@ let games = [
     },
 ];
 
+const includesAll = (checkArray = [], match = []) => {
+    for (const currentMatch of match) {
+        if (!checkArray.includes(currentMatch)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 const GamesView = (props) => {
     const [count, setCount] = useState(0);
     const [tmpGames, setTmpGames] = useState(games);
 
     useEffect(() => {
-        // TODO:
-        // 1. Create filtering system ):
-        // 2. Create pagination system (Should be easy with mantine)
-
-        console.log(props.filterList);
-        if (props.filterList.length > 0) {
-            // let tmp = [];
-            // if (props.filterList.length == 1) {
-            //     for (let i = 0; i < games.length; i++) {
-            //         for (let j = 0; j < games[i].tags.length; j++) {
-            //             if (games[i].tags[j].label == props.filterList[0]) {
-            //                 tmp.push(games[i]);
-            //             }
-            //         }
-            //     }
-            // } else if (props.filterList.length >= 2) {
-            //     for (let i = 0; i < tmpGames.length; i++) {
-            //         for (let j = 0; j < tmpGames[i].tags.length; j++) {
-            //             if (tmpGames[i].tags[j].label == props.filterList[0]) {
-            //                 tmp.push(tmpGames[i]);
-            //             }
-            //         }
-            //     }
-            // }
-            // setTmpGames(tmp);
-        } else {
-            setTmpGames(games);
+        let tmpGames = [];
+        for (const game of games) {
+            const tagArray = [];
+            for (const tag of game.tags) {
+                tagArray.push(tag.label);
+            }
+            if (props.filterList.length > 0) {
+                if (includesAll(tagArray, props.filterList)) {
+                    tmpGames.push(game);
+                }
+            }
+            else {
+                tmpGames = games;
+            }
         }
+        setTmpGames(tmpGames);
+
     }, [props.filterList]);
 
     const { classes, ctx } = useStyles();
