@@ -19,6 +19,7 @@ const useStyles = createStyles((theme) => ({
         //height: 470,
         display: "flex",
         flexDirection: "column",
+        maxWidth: 400,
 
         "&.hidden": {
             display: "none",

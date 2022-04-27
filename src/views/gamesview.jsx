@@ -7,6 +7,7 @@ import {
     Button,
     ScrollArea,
 } from "@mantine/core";
+import data from "../data/games.json";
 import PageHeader from "../components/pageheader";
 import { GameCard } from "../components/card";
 
@@ -45,8 +46,13 @@ let games = [
         subtext:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
         // tags: ["3d", "racing", "1-grade"],
-        tags: [{ label: "3d" }, { label: "rollespil" }, { label: "1. klasse" }],
-        subject: "dansk",
+        tags: [
+            { label: "Dansk" },
+            { label: "3D" },
+            { label: "Rollespil" },
+            { label: "1. Klasse" },
+        ],
+        subject: "Dansk",
     },
     {
         image: "https://images.unsplash.com/photo-1511216335778-7cb8f49fa7a3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
@@ -54,8 +60,13 @@ let games = [
         subtext:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
         // tags: ["2d", "racing", "1-grade"],
-        tags: [{ label: "2d" }, { label: "arkade" }, { label: "1. klasse" }],
-        subject: "engelsk",
+        tags: [
+            { label: "Engelsk" },
+            { label: "2D" },
+            { label: "Arkade" },
+            { label: "1. Klasse" },
+        ],
+        subject: "Engelsk",
     },
     {
         image: "https://images.unsplash.com/photo-1511216335778-7cb8f49fa7a3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
@@ -64,11 +75,12 @@ let games = [
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
         // tags: ["roleplay", "racing", "7-grade"],
         tags: [
-            { label: "rollespil" },
-            { label: "bilspil" },
-            { label: "7. klasse" },
+            { label: "Matematik" },
+            { label: "Rollespil" },
+            { label: "Bilspil" },
+            { label: "7. Klasse" },
         ],
-        subject: "matematik",
+        subject: "Matematik",
     },
     {
         image: "https://images.unsplash.com/photo-1511216335778-7cb8f49fa7a3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
@@ -76,8 +88,13 @@ let games = [
         subtext:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
         // tags: ["2d", "racing", "1-grade"],
-        tags: [{ label: "2d" }, { label: "bilspil" }, { label: "1. klasse" }],
-        subject: "biologi",
+        tags: [
+            { label: "Biologi" },
+            { label: "2D" },
+            { label: "Bilspil" },
+            { label: "1. Klasse" },
+        ],
+        subject: "Biologi",
     },
     {
         image: "https://images.unsplash.com/photo-1511216335778-7cb8f49fa7a3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
@@ -85,8 +102,13 @@ let games = [
         subtext:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
         //tags: ["2d", "racing", "1-grade", "AAAAAAAA"],
-        tags: [{ label: "2d" }, { label: "bilspil" }, { label: "7. klasse" }],
-        subject: "dansk",
+        tags: [
+            { label: "Dansk" },
+            { label: "2D" },
+            { label: "Bilspil" },
+            { label: "7. Klasse" },
+        ],
+        subject: "Dansk",
     },
 ];
 
@@ -95,59 +117,31 @@ const GamesView = (props) => {
     const [tmpGames, setTmpGames] = useState(games);
 
     useEffect(() => {
+        // TODO:
+        // 1. Create filtering system ):
+        // 2. Create pagination system (Should be easy with mantine)
+
+        console.log(props.filterList);
         if (props.filterList.length > 0) {
-            let tmp = [];
-            if (props.filterList.length == 1) {
-                for (let i = 0; i < games.length; i++) {
-                    for (let j = 0; j < props.filterList.length; j++) {
-                        if (
-                            games[i].subject ===
-                            props.filterList[j].toLowerCase()
-                        ) {
-                            tmp.push(games[i]);
-                        }
-
-                        for (let l = 0; l < games[i].tags.length; l++) {
-                            if (
-                                games[i].tags[l].label ===
-                                props.filterList[j].toLowerCase()
-                            ) {
-                                tmp.push(games[i]);
-                            }
-                        }
-                    }
-                }
-            } else {
-                for (let i = 0; i < tmpGames.length; i++) {
-                    for (let j = 0; j < props.filterList.length; j++) {
-                        if (
-                            tmpGames[i].subject ===
-                            props.filterList[j].toLowerCase()
-                        ) {
-                            tmp.push(tmpGames[i]);
-                        } else {
-                            for (let l = 0; l < tmpGames[i].tags.length; l++) {
-                                if (
-                                    tmpGames[i].tags[l].label ===
-                                    props.filterList[j].toLowerCase()
-                                ) {
-                                    tmp.push(tmpGames[i]);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            // Remove duplicates
-            for (let n = 0; n < tmp.length; n++) {
-                for (let m = n + 1; m < tmp.length; m++) {
-                    if (tmp[n].title === tmp[m].title) {
-                        tmp.splice(m, 1);
-                    }
-                }
-            }
-
-            setTmpGames(tmp);
+            // let tmp = [];
+            // if (props.filterList.length == 1) {
+            //     for (let i = 0; i < games.length; i++) {
+            //         for (let j = 0; j < games[i].tags.length; j++) {
+            //             if (games[i].tags[j].label == props.filterList[0]) {
+            //                 tmp.push(games[i]);
+            //             }
+            //         }
+            //     }
+            // } else if (props.filterList.length >= 2) {
+            //     for (let i = 0; i < tmpGames.length; i++) {
+            //         for (let j = 0; j < tmpGames[i].tags.length; j++) {
+            //             if (tmpGames[i].tags[j].label == props.filterList[0]) {
+            //                 tmp.push(tmpGames[i]);
+            //             }
+            //         }
+            //     }
+            // }
+            // setTmpGames(tmp);
         } else {
             setTmpGames(games);
         }
@@ -162,8 +156,7 @@ const GamesView = (props) => {
                     <GameCard
                         title={game.title}
                         description={game.subtext}
-                        subject={game.subject}
-                        //badges={game.tags.map((tag) => [{ label: tag }])}
+                        subject={game.tags[0].label}
                         badges={game.tags}
                         image={game.image}
                         id={game.title}

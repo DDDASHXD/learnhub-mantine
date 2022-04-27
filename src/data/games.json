@@ -1,0 +1,30 @@
+{
+ "games": [
+     {
+        "image": "https://images.unsplash.com/photo-1511216335778-7cb8f49fa7a3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
+        "title": "Dansk spil",
+        "subtext":
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
+        "tags": [
+            { "label": "Dansk" },
+            { "label": "3D" },
+            { "label": "Rollespil" },
+            { "label": "1. Klasse" }
+        ],
+        "subject": "Dansk"
+     },
+     {
+        "image": "https://images.unsplash.com/photo-1511216335778-7cb8f49fa7a3?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=720&q=80",
+        "title": "Engelsk spil",
+        "subtext":
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut vitae illum ullam dicta, eos, eligendi ea pariatur delectus quo quidem a quisquam molestias fuga natus facilis officiis harum ad magnam?",
+        "tags": [
+            { "label": "Engelsk" },
+            { "label": "2D" },
+            { "label": "Arkade" },
+            { "label": "1. Klasse" }
+        ],
+        "subject": "Engelsk"
+     }
+ ]
+}

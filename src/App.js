@@ -11,6 +11,7 @@ const useStyles = createStyles((theme) => ({
   app: {
     height: "100vh;",
     display: "flex",
+    maxWdith: "100vw",
 
     '&*': {
       fontFamily: `Greycliff CF, ${theme.fontFamily}`,
